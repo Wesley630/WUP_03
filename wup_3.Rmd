@@ -35,9 +35,38 @@ basicCN + geom_boxplot()
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
+The boxplot shows three categories of where people sit. The back , front, and middle. The back peoples median differs from the other two are more foward. We can say that the people in the back are the alcoholic ones.
+
+
+
 ## Numerical Summarys 
 
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+The data shows differences in alcohol consumption based on where people sat (Back, Front, or Middle). On average, people who sat in the Back seat drank the most alcohol, followed by those in the Middle seat, and those in the Front seat drank the least amount. The data also shows that the amount of alcohol consumed in the Back seat was more spread out than in the Front and Middle seats
+
+
+
 ## Inferential Tests
+
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+There is a significant difference in alcohol consumption between the seating positions, with a p-value of 0.000116. This p-value is less than 0.05, which means that the difference in alcohol consumption is likely not due to chance and is statistically significant.
+
+
+
+```{r}
+plot(TukeyHSD(model1))
+```
+
+
+This plot shows that theres a difference of the alcohol consumed between the back and the front, and between the back and middle seats. The front and the back intervals cross which means theres not much of a difference between them, however the back and the middle intervals never cross just like the back and the front dont cross either.
+
+
 
 ## Conclusions
 
